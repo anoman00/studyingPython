@@ -124,8 +124,57 @@ def playGame(wordList):
 
     wordList: list (string)
     """
+    value = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+    global hand
+    if value == 'r':
+        if hand == {}:
+            print('You have not played a hand yet. Please play a new hand first!')
+            return playGame(wordList)
+        else:
+            compOrYou = input('Enter u to have yourself play, c to have the computer play:')
+            while compOrYou != 'u' and compOrYou != 'c':
+                print('Invalid Command.')
+                compOrYou = input('Enter u to have yourself play, c to have the computer play:')
+                if compOrYou == 'u':
+                    playHand(hand, wordList, HAND_SIZE)
+                    return playGame(wordList)
+                elif compOrYou == 'c':
+                    compPlayHand(hand, wordList, HAND_SIZE)
+                    return playGame(wordList)
+            if compOrYou == 'u':
+                playHand(hand, wordList, HAND_SIZE)
+                return playGame(wordList)
+            elif compOrYou == 'c':
+                compPlayHand(hand, wordList, HAND_SIZE)
+                return playGame(wordList)
+    elif value == 'n':
+        compOrYou = input('Enter u to have yourself play, c to have the computer play:')
+        while compOrYou != 'u' and compOrYou != 'c':
+            print('Invalid Command.')
+            compOrYou = input('Enter u to have yourself play, c to have the computer play:')
+            if compOrYou == 'u':
+                hand = dealHand(HAND_SIZE)
+                playHand(hand, wordList, HAND_SIZE)
+                return playGame(wordList)
+            elif compOrYou == 'c':
+                hand = dealHand(HAND_SIZE)
+                compPlayHand(hand, wordList, HAND_SIZE)
+                return playGame(wordList)
+        if compOrYou == 'u':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+            return playGame(wordList)
+        elif compOrYou == 'c':
+            hand = dealHand(HAND_SIZE)
+            compPlayHand(hand, wordList, HAND_SIZE)
+            return playGame(wordList)
+    elif value == 'e':
+        print('')
+    else:
+        print('Invalid command.')
+        return playGame(wordList)
     # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
+    # <-- Remove this when you code this function
 
         
 #
