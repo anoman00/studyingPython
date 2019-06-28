@@ -1,0 +1,279 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Jun  8 20:43:57 2019
+
+@author: abdullahnoman
+"""
+def optimal_lowest_sum(list_1, list_2, target):
+    list_1.sort()
+    list_2.sort()
+    index_1 = 0
+    index_2 = 0
+    difference = target - list_1[index_1] - list_2[index_2]
+    while difference > 0 and index_1 < len(list_1):
+        index_1 += 1
+        difference = target - list_1[index_1] - list_2[index_2]
+    while difference > 0 and index_2 < len(list_2):
+        index_2 += 1
+        difference = target - list_1[index_1] - list_2[index_2]
+    opt_diff = []
+    #now we know the difference <= 0
+    #we also have some index_1 and index_2 where the difference lie
+    #if next number on list is same then i dont hve to find diff there, it will be 
+    count = 0
+    next_diff = target - list_1[index_1 - count] - list_2[index_2 + count]
+    while True:
+        try:
+            if abs(difference) > abs(next_diff):
+                opt_diff.clear()
+                opt_diff.append({next_diff: [list_1[index_1 - count], list_2[index_2 + count]]})
+                difference = next_diff
+                count += 1
+            elif abs(difference) == abs(next_diff):
+                opt_diff.append({difference: [list_1[index_1 - count], list_2[index_2 + count]]})
+                difference = next_diff
+                count += 1
+            else:
+                difference = next_diff
+                count += 1
+        except:
+            break
+    return opt_diff
+
+
+def cakes(recipe, available):
+    # TODO: insert code
+    cake_count = []
+    for key in recipe:
+        if key not in available:
+            available[key] = 0
+        cake_count.append(int(available[key]/recipe[key]))
+    return min(cake_count)
+
+memory = {}
+def fibonacci(n):
+    if n in [0, 1]:
+        memory[n] = n
+        return n
+    if n not in memory:
+        memory[n] = fibonacci(n - 1) + fibonacci(n - 2)
+        return memory[n]
+    else:
+        return memory[n]
+    
+    
+def addTwoDigits(n):
+    sum = 0
+    for i in str(n):
+        sum += int(i)
+    return sum
+
+#def isDiagonalMatrix(matrix):
+#    count = 0
+#    for i in range(len(matrix)):
+#        for j in range(len(matrix[i])):
+#            if i != j:
+#                if matrix[i][j] != 0:
+#                    count += 1
+#    if count > 0:
+#        return False
+#    else:
+#        return True
+    
+def isDiagonalMatrix(matrix):
+    count = 0
+    for i in range(len(matrix)):
+        del matrix[i][i]
+        print(matrix[i])
+        if matrix[i].count(0) == len(matrix) - 2:
+            count += 1
+    if count > 0:
+        return False
+    else:
+        return True
+    
+    
+def alarmClock(setTime, timeToSet):
+    setTimeList = setTime.split(':')
+    timeToSetList = timeToSet.split(':')
+    hour_scrolling = []
+    hour_scrolling.append(abs(int(setTimeList[0]) - int(timeToSetList[0])))
+    hour_scrolling.append(24 - abs(int(setTimeList[0]) - int(timeToSetList[0])))
+    hours = min(hour_scrolling)
+    minute_scrolling = []
+    minute_scrolling.append(abs(int(setTimeList[1]) - int(timeToSetList[1])))
+    minute_scrolling.append(60 - abs(int(setTimeList[1]) - int(timeToSetList[1])))
+    minutes = min(minute_scrolling)
+    return hours + minutes
+
+def nearestGreater(a):
+    b = []
+    for i in range(len(a)):
+        count = 0
+        while count < len(a):
+            if a[i] < a[count]:
+                b.append(count)
+                break
+            elif a[i] == max(a):
+                b.append(-1)
+                break
+            else:
+                count += 1
+    return b
+    
+#def nearestGreater(a):
+#    b = []
+#    for i in range(len(a)):
+#        count = 0
+#        mini = {}
+#        while count < len(a):
+#            if a[i] < a[count]:
+#                mini[count] = abs(count - i)
+#                count += 1
+#            elif a[i] == max(a):
+#                b.append(-1)
+#                break
+#            else:
+#                count += 1
+#        minval = min(mini.values)
+#        b.append(minval)
+    
+
+# dictionary of index value for the duplicate of each value in list
+def firstDuplicate1(a):
+    duplicate = {}
+    for i in set(a):
+        if a.count(i) > 1:
+            duplicate[i] = a.index(i, 1 + a.index(i))
+    v = list(duplicate.values())
+    k = list(duplicate.keys())
+    if duplicate == {}:
+        return -1
+    else:
+        return k[v.index(min(v))]
+# iterate until first duplicate    
+def firstDuplicate2(a):
+    k = []
+    count = 1
+    while count <= len(a):
+        if len(a[0:count]) > len(set(a[0:count])):
+            k.append(a[count - 1])
+            break
+        else:
+            print(count)
+            count += 1
+    print(count)
+    if k == []:
+        return -1
+    else:
+        return k[0]
+# binary search of duplicate
+def firstDuplicate(a):
+    if len(a) != len(set(a)):
+        first = 0
+        last = len(a)
+        found = False
+        while (first <= last and not found):
+            mid = (first + last) // 2
+            if len(a[0:mid]) == len(set(a[0:mid])):
+                if len(a[0:mid+1]) > len(set(a[0:mid+1])):
+                    found = True
+                else:
+                    first = mid
+            else:
+                last = mid
+        if found == True:
+            return a[mid]
+        else:
+            return -1
+    else:
+        return -1
+# most efficient search of first non-repeating character
+# instead of searching the given string which can be too long, search the possible characters in the string
+def firstNotRepeatingCharacter(s):
+    indices = []
+    for i in 'abcdefghijklmnopqrstuvwxyz':
+        if s.count(i) == 1:
+            indices.append(s.index(i))
+    if indices == []:
+        return '_'
+    else:
+        return s[min(indices)]
+
+def rotateImage1(a):
+    rotated = []
+    n = len(a)
+    for i in range(n):
+        rotated.append([])
+    count = n - 1
+    while count >= 0:
+        index = 0
+        for i in a[count]:
+            rotated[index].append(i)
+            index += 1
+        count -= 1
+    return rotated
+    
+def rotateImage2(a):
+    return list(zip(*reversed(a)))
+
+
+def sudoku2(grid):
+    fails = 0
+    for i in grid:
+        for j in "123456789":
+            if i.count(j) > 1:
+                fails += 1
+                
+    rotated = []
+    n = len(grid)
+    for i in range(n):
+        rotated.append([])
+    count = n - 1
+    while count >= 0:
+        index = 0
+        for i in grid[count]:
+            rotated[index].append(i)
+            index += 1
+        count -= 1
+    for k in rotated:
+        for l in "123456789":
+            if k.count(l) > 1:
+                fails += 1
+                 
+    boxes = []
+    for k in range(3):
+        for j in range(3):
+            boxes.append(grid[3*k - 3][3*(j):3*(j+1)] + grid[3*k - 2][3*(j):3*(j+1)] + grid[3*k - 1][3*(j):3*(j+1)])
+    for k in boxes:
+        for l in "123456789":
+            if k.count(l) > 1:
+                fails += 1
+    
+    if fails > 0:
+        return False
+    else:
+        return True
+    
+            
+
+def isCryptSolution(crypt, solution):
+    dictionary = {}
+    for i in solution:
+        dictionary[i[0]] = i[1]
+    if '0' in dictionary.values():
+        for i in crypt:
+            if i[0] == 
+        
+    sum = 0
+    for i in crypt:
+        for j in range(len(i)):
+            i = i.replace(i[j], dictionary[i[j]])
+        sum += int(i)
+    return sum
+
+
+
+
+    
