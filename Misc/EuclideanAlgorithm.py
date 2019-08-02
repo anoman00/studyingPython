@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug  2 23:06:28 2018
-
-@author: Nishan
 Euclidean Algorithm done iteratively and recursively
 """
 def gcdIter(a, b):

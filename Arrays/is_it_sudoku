@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jun  8 20:43:57 2019
+'''
+From two lists find a number in each such that their sum is closest to the target sum.
+'''
 
-@author: abdullahnoman
-"""
+
 def optimal_lowest_sum(list_1, list_2, target):
     list_1.sort()
     list_2.sort()
@@ -18,20 +16,22 @@ def optimal_lowest_sum(list_1, list_2, target):
         index_2 += 1
         difference = target - list_1[index_1] - list_2[index_2]
     opt_diff = []
-    #now we know the difference <= 0
-    #we also have some index_1 and index_2 where the difference lie
-    #if next number on list is same then i dont hve to find diff there, it will be 
+    # now we know the difference <= 0
+    # we also have some index_1 and index_2 where the difference lie
+    # if next number on list is same then i dont hve to find diff there, it will be
     count = 0
     next_diff = target - list_1[index_1 - count] - list_2[index_2 + count]
     while True:
         try:
             if abs(difference) > abs(next_diff):
                 opt_diff.clear()
-                opt_diff.append({next_diff: [list_1[index_1 - count], list_2[index_2 + count]]})
+                opt_diff.append(
+                    {next_diff: [list_1[index_1 - count], list_2[index_2 + count]]})
                 difference = next_diff
                 count += 1
             elif abs(difference) == abs(next_diff):
-                opt_diff.append({difference: [list_1[index_1 - count], list_2[index_2 + count]]})
+                opt_diff.append(
+                    {difference: [list_1[index_1 - count], list_2[index_2 + count]]})
                 difference = next_diff
                 count += 1
             else:
@@ -43,7 +43,6 @@ def optimal_lowest_sum(list_1, list_2, target):
 
 
 def cakes(recipe, available):
-    # TODO: insert code
     cake_count = []
     for key in recipe:
         if key not in available:
@@ -51,7 +50,10 @@ def cakes(recipe, available):
         cake_count.append(int(available[key]/recipe[key]))
     return min(cake_count)
 
+
 memory = {}
+
+
 def fibonacci(n):
     if n in [0, 1]:
         memory[n] = n
@@ -61,15 +63,16 @@ def fibonacci(n):
         return memory[n]
     else:
         return memory[n]
-    
-    
+
+
 def addTwoDigits(n):
     sum = 0
     for i in str(n):
         sum += int(i)
     return sum
 
-#def isDiagonalMatrix(matrix):
+
+# def isDiagonalMatrix(matrix):
 #    count = 0
 #    for i in range(len(matrix)):
 #        for j in range(len(matrix[i])):
@@ -80,7 +83,11 @@ def addTwoDigits(n):
 #        return False
 #    else:
 #        return True
-    
+'''
+Determines whether a given matrix in the form of list of lists is a diagonal matrix.
+'''
+
+
 def isDiagonalMatrix(matrix):
     count = 0
     for i in range(len(matrix)):
@@ -92,20 +99,29 @@ def isDiagonalMatrix(matrix):
         return False
     else:
         return True
-    
-    
+
+
+'''
+Changes alarm time from the setTime to the timeToSet within a scrolling clock.
+Where the hours are military.
+'''
+
+
 def alarmClock(setTime, timeToSet):
     setTimeList = setTime.split(':')
     timeToSetList = timeToSet.split(':')
     hour_scrolling = []
     hour_scrolling.append(abs(int(setTimeList[0]) - int(timeToSetList[0])))
-    hour_scrolling.append(24 - abs(int(setTimeList[0]) - int(timeToSetList[0])))
+    hour_scrolling.append(
+        24 - abs(int(setTimeList[0]) - int(timeToSetList[0])))
     hours = min(hour_scrolling)
     minute_scrolling = []
     minute_scrolling.append(abs(int(setTimeList[1]) - int(timeToSetList[1])))
-    minute_scrolling.append(60 - abs(int(setTimeList[1]) - int(timeToSetList[1])))
+    minute_scrolling.append(
+        60 - abs(int(setTimeList[1]) - int(timeToSetList[1])))
     minutes = min(minute_scrolling)
     return hours + minutes
+
 
 def nearestGreater(a):
     b = []
@@ -121,8 +137,8 @@ def nearestGreater(a):
             else:
                 count += 1
     return b
-    
-#def nearestGreater(a):
+
+# def nearestGreater(a):
 #    b = []
 #    for i in range(len(a)):
 #        count = 0
@@ -138,9 +154,19 @@ def nearestGreater(a):
 #                count += 1
 #        minval = min(mini.values)
 #        b.append(minval)
-    
 
+
+'''
+Given an array a that contains only numbers in the range from 1 to a.
+length, find the first duplicate number for which the second occurrence has the minimal index. 
+In other words, if there are more than 1 duplicated numbers, 
+return the number for which the second occurrence has a smaller 
+index than the second occurrence of the other number does. 
+If there are no such elements, return -1.
+'''
 # dictionary of index value for the duplicate of each value in list
+
+
 def firstDuplicate1(a):
     duplicate = {}
     for i in set(a):
@@ -152,7 +178,9 @@ def firstDuplicate1(a):
         return -1
     else:
         return k[v.index(min(v))]
-# iterate until first duplicate    
+# iterate until first duplicate
+
+
 def firstDuplicate2(a):
     k = []
     count = 1
@@ -169,6 +197,8 @@ def firstDuplicate2(a):
     else:
         return k[0]
 # binary search of duplicate
+
+
 def firstDuplicate(a):
     if len(a) != len(set(a)):
         first = 0
@@ -189,8 +219,20 @@ def firstDuplicate(a):
             return -1
     else:
         return -1
+
+
+'''
+Note: Write a solution that only iterates over the string once and uses 
+O(1) additional memory, since this is what you would be asked to do during a real interview.
+
+Given a string s consisting of small English letters, find and return 
+the first instance of a non-repeating character in it. 
+If there is no such character, return '_'.
+'''
 # most efficient search of first non-repeating character
 # instead of searching the given string which can be too long, search the possible characters in the string
+
+
 def firstNotRepeatingCharacter(s):
     indices = []
     for i in 'abcdefghijklmnopqrstuvwxyz':
@@ -200,6 +242,16 @@ def firstNotRepeatingCharacter(s):
         return '_'
     else:
         return s[min(indices)]
+
+
+'''
+Note: Try to solve this task in-place (with O(1) additional memory), 
+since this is what you'll be asked to do during an interview.
+
+You are given an n x n 2D matrix that represents an image. 
+Rotate the image by 90 degrees (clockwise).
+'''
+
 
 def rotateImage1(a):
     rotated = []
@@ -214,9 +266,22 @@ def rotateImage1(a):
             index += 1
         count -= 1
     return rotated
-    
+
+
 def rotateImage2(a):
     return list(zip(*reversed(a)))
+
+
+'''
+Sudoku is a number-placement puzzle. The objective is to fill a 9 × 9 grid 
+with numbers in such a way that each column, each row, and each of the nine 
+3 × 3 sub-grids that compose the grid all contain all of the numbers from 
+1 to 9 one time.
+
+Implement an algorithm that will check whether the given grid of numbers 
+represents a valid Sudoku puzzle according to the layout rules described 
+above. Note that the puzzle represented by grid does not have to be solvable.
+'''
 
 
 def sudoku2(grid):
@@ -225,7 +290,7 @@ def sudoku2(grid):
         for j in "123456789":
             if i.count(j) > 1:
                 fails += 1
-                
+
     rotated = []
     n = len(grid)
     for i in range(n):
@@ -241,39 +306,54 @@ def sudoku2(grid):
         for l in "123456789":
             if k.count(l) > 1:
                 fails += 1
-                 
+
     boxes = []
     for k in range(3):
         for j in range(3):
-            boxes.append(grid[3*k - 3][3*(j):3*(j+1)] + grid[3*k - 2][3*(j):3*(j+1)] + grid[3*k - 1][3*(j):3*(j+1)])
+            boxes.append(grid[3*k - 3][3*(j):3*(j+1)] + grid[3*k - 2]
+                         [3*(j):3*(j+1)] + grid[3*k - 1][3*(j):3*(j+1)])
     for k in boxes:
         for l in "123456789":
             if k.count(l) > 1:
                 fails += 1
-    
+
     if fails > 0:
         return False
     else:
         return True
-    
-            
+
+
+'''
+A cryptarithm is a mathematical puzzle for which the goal is to find the 
+correspondence between letters and digits, such that the given arithmetic 
+equation consisting of letters holds true when the letters are converted to digits.
+
+You have an array of strings crypt, the cryptarithm, and an an array containing 
+the mapping of letters and digits, solution. The array crypt will contain three 
+non-empty strings that follow the structure: [word1, word2, word3], which should 
+be interpreted as the word1 + word2 = word3 cryptarithm.
+
+If crypt, when it is decoded by replacing all of the letters in the cryptarithm 
+with digits using the mapping in solution, becomes a valid arithmetic equation 
+containing no numbers with leading zeroes, the answer is true. If it does not 
+become a valid arithmetic solution, the answer is false.
+
+Note that number 0 doesn't contain leading zeroes (while for example 00 or 0123 do).
+'''
+
 
 def isCryptSolution(crypt, solution):
     dictionary = {}
     for i in solution:
         dictionary[i[0]] = i[1]
-    if '0' in dictionary.values():
-        for i in crypt:
-            if i[0] == 
-        
-    sum = 0
-    for i in crypt:
-        for j in range(len(i)):
-            i = i.replace(i[j], dictionary[i[j]])
-        sum += int(i)
-    return sum
 
-
-
-
-    
+    for i in range(3):
+        for j in range(len(crypt[i])):
+            crypt[i] = crypt[i].replace(
+                crypt[i][j], dictionary[crypt[i][j]], 1)
+            if crypt[i][0] == '0' and len(crypt[i]) > 1:
+                return False
+    if int(crypt[0]) + int(crypt[1]) == int(crypt[2]):
+        return True
+    else:
+        return False

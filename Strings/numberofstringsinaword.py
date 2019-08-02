@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Aug  2 20:57:07 2018
-
-@author: Nishan
-"""
-
 
 def numberoftimesStringAppearsInWord(string, word):
     num = 0

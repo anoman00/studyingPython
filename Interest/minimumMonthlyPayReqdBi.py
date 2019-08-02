@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug  2 21:11:25 2018
-
-@author: Nishan
 This calculates minimum monthly payment required to 
 pay off balance within 1 year with interest 
 much faster using bisection.

@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug  2 21:08:32 2018
-
-@author: Nisha
 This calculates minimum monthly payment required to 
 pay off balance within 1 year with interest.
 """

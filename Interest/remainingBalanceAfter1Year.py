@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Aug  2 21:07:24 2018
-
-@author: Nishan
+Calculates remaining balance after interest paid
 """
 
 def b(balance, monthlyPaymentRate, annualInterestRate):

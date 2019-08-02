@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 20 01:55:11 2018
 
-@author: Nishan
-"""
 number = input('Insert a number such that the primes after it can be generated:' )
 def genPrime():
     p = number

@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Aug  2 21:01:45 2018
 
-@author: Nishan
-"""
 def longestAlphabetical(s):
     count = 0
     m = 0

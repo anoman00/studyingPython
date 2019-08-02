@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Aug  2 20:53:12 2018
-
-@author: Nishan
-"""
 
 num = 0
 for letter in s:

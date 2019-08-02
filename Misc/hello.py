@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 28 22:10:30 2018
-
-@author: Nishan
-"""
 
 print('Please think of a number between 0 and 100!')
 low = 0
